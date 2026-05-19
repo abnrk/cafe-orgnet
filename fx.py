@@ -98,7 +98,12 @@ class AudioEffects:
     try:
       fn = randStr(5)
       print(fn)
-      clip.write_audiofile(f"tmp/{fn}.ogg",bitrate="1k",ffmpeg_params=["-ar","8000"])
-      return AudioFileClip(f"tmp/{fn}.ogg")
+      clip.write_audiofile(f"tmp/{fn}.mp3",bitrate="1k",ffmpeg_params=["-ar","8000"])
+      with open(f"tmp/{fn}.mp3","rb") as f:
+        data = f.read()
+      newdata = corruptor.corrupt(data,rnd(50,90),5,rnd(50,90))
+      with open(f"tmp/{fn}.mp3","wb") as f:
+        f.write(newdata)
+      return AudioFileClip(f"tmp/{fn}.mp3")
     except:
       return clip

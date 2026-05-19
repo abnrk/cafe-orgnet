@@ -14,7 +14,7 @@ VideoSources = [i.resize(tuple(VideoSources[0].size)) for i in VideoSources]
 clips = []
 effects = ["none","mashaudio","blend","hueshift"]
 afx = ["test"]
-#effects = ["hueshift"]
+#effects = ["mashaudio"]
 
 def randvideoclip():
   return random.choice(VideoSources)
@@ -35,8 +35,8 @@ def randclip(nomusic=False):
   audiofx = random.choice(afx)
   print(effect)
   if effect == "mashaudio":
-    clip.audio = randaudio(subclip(randvideoclip()).audio)
-    r = clip.fx(vfx.speedx,2)
+    r.set_audio(randaudio(subclip(randvideoclip()).audio))
+    #r = clip.fx(vfx.speedx,2)
   if effect == "blend":
     r = fx.blend(clip,subclip(randvideoclip()))
   if effect == "hueshift":
